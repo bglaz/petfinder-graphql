@@ -94,6 +94,7 @@ type Shelter {
   email: String
   longitude: Float
   latitude: Float
+  pets(status: AnimalStatus, offset: Int = 0, count: Int = 25): [Pet!]
 }
 
 
@@ -137,6 +138,11 @@ type Query {
   Returns a record for a single shelter.
   """
   shelterGet(id: String!): Shelter!
+
+  """
+  Returns a collection of pet records for an individual shelter
+  """
+  shelterGetPets(id: String!, status: AnimalStatus, offset: Int = 0, count: Int = 25): [Pet!]
 
 }
 `;
