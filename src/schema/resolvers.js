@@ -25,6 +25,24 @@ const parsePetfinderObj = function(obj) {
   return result ? result : null;
 };
 
+const parsePetfinderPet = function(pet) {
+  return {
+    id: pet.id['$t'],
+    shelterPetId: pet.shelterPetId['$t'],
+    shelterId: pet.shelterId['$t'],
+    age: pet.age['$t'],
+    name: pet.name['$t'],
+    mix: pet.mix['$t'] === 'yes',
+    sex: pet.sex['$t'],
+    size: pet.size['$t'],
+    status: pet.status['$t'],
+    description: pet.description['$t'],
+    animal: pet.animal['$t'].toLowerCase(),
+    breeds: pet.breeds.breed.length ? pet.breeds.breed.map( (breed) => breed['$t']) : [pet.breeds.breed['$t']],
+    contact: parsePetfinderObj(pet.contact)
+  }
+}
+
 
 
 module.exports = {
@@ -38,26 +56,46 @@ module.exports = {
       return rawBreedList.map( (breed) => breed['$t'] );
     },
 
+    async petGet(_, args) {
+      const method = 'pet.get',
+        results = await execQuery(method, args),
+        rawData = results.data.petfinder.pet;
+
+      return parsePetfinderPet(rawData);
+    },
+
     async petGetRandom(_, args) {
       const method = 'pet.getRandom',
         results = await execQuery(method, {output: 'full', ...args}),
         rawData = results.data.petfinder.pet;
 
-        return {
-          id: rawData.id['$t'],
-          shelterPetId: rawData.shelterPetId['$t'],
-          shelterId: rawData.shelterId['$t'],
-          age: rawData.age['$t'],
-          name: rawData.name['$t'],
-          mix: rawData.mix['$t'] === 'yes',
-          sex: rawData.sex['$t'],
-          size: rawData.size['$t'],
-          status: rawData.status['$t'],
-          description: rawData.description['$t'],
-          animal: rawData.animal['$t'].toLowerCase(),
-          breeds: rawData.breeds.breed.length ? rawData.breeds.breed.map( (breed) => breed['$t']) : [rawData.breeds.breed['$t']],
-          contact: parsePetfinderObj(rawData.contact)
-        }
+        return parsePetfinderPet(rawData);
+    },
+
+    async petFind(_, args)
+    {
+      const method = 'pet.find',
+        results = await execQuery(method, {output: 'full', ...args}),
+        rawData = results.data.petfinder.pets.pet;
+
+      return rawData.length ? rawData.map( (pet) => parsePetfinderPet(pet) ) : [parsePetfinderPet(rawData)];
+    },
+
+    async shelterFind(_, args)
+    {
+      const method = 'shelter.find',
+        results = await execQuery(method, args),
+        rawData = results.data.petfinder.shelters.shelter;
+
+      return rawData.length ? rawData.map( (shelter) => parsePetfinderObj(shelter) ) : [parsePetfinderObj(rawData)];
+    },
+
+    async shelterGet(_, args) {
+      const method = 'shelter.get',
+        results = await execQuery(method, args),
+        rawData = results.data.petfinder.shelter;
+
+      return parsePetfinderObj(rawData);
     }
   },
 
