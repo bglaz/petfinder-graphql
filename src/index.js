@@ -1,3 +1,8 @@
+const envResult = require('dotenv').config();
+if (envResult.error) {
+  throw envResult.error
+}
+
 const express = require('express');
 
 // This package automatically parses JSON requests.
@@ -16,7 +21,7 @@ app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql'
 }));
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`GraphQL server running on port ${PORT}.`)
 });

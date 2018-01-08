@@ -2,8 +2,13 @@
 
 const axios = require('axios');
 
-const API_KEY = '2e4f2fb330d06494b863066ce7a1b1e6';
+const API_KEY = process.env.API_KEY;
 const API_ENDPOINT = 'http://api.petfinder.com';
+
+if( ! API_KEY || API_KEY === 'MY_KEY' )
+{
+  throw new Error("You must specify your api key in the .env file");
+}
 
 const execQuery = function(method, args)
 {
