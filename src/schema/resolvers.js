@@ -30,6 +30,7 @@ const parsePetfinderPet = function(pet) {
     id: pet.id['$t'],
     shelterPetId: pet.shelterPetId['$t'],
     shelterId: pet.shelterId['$t'],
+    options: pet.options.option.length ? pet.options.option.map( (option) => option['$t']) : [pet.options.option['$t']],
     age: pet.age['$t'],
     name: pet.name['$t'],
     mix: pet.mix['$t'] === 'yes',

@@ -24,6 +24,17 @@ enum AnimalSize {
   XL
 }
 
+enum AnimalOptions {
+  specialNeeds
+  noDogs
+  noCats
+  noKids
+  noClaws
+  hasShots
+  housetrained
+  altered
+}
+
 """
 A = Adoptable, H = Hold, P = Pending, X = Adopted / Removed
 """
@@ -56,6 +67,7 @@ type Pet {
   id: Int!
   shelterId: String
   shelterPetId: String
+  options: [AnimalOptions!]
   age: AnimalAge
   name: String!
   mix: Boolean
