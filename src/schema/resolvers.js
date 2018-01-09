@@ -35,17 +35,38 @@ const parsePetfinderPet = function(pet) {
     id: pet.id['$t'],
     shelterPetId: pet.shelterPetId['$t'],
     shelterId: pet.shelterId['$t'],
-    options: pet.options.option.length ? pet.options.option.map( (option) => option['$t']) : [pet.options.option['$t']],
+    options: pet.options.option ? ( pet.options.option.length ? pet.options.option.map( (option) => option['$t']) : [pet.options.option['$t']] ) : null,
     age: pet.age['$t'],
     name: pet.name['$t'],
     mix: pet.mix['$t'] === 'yes',
     sex: pet.sex['$t'],
     size: pet.size['$t'],
+    photos: parsePetPhotos(pet.media.photos),
     status: pet.status['$t'],
     description: pet.description['$t'],
     animal: pet.animal['$t'].toLowerCase(),
     breeds: pet.breeds.breed.length ? pet.breeds.breed.map( (breed) => breed['$t']) : [pet.breeds.breed['$t']],
     contact: parsePetfinderObj(pet.contact)
+  }
+};
+
+const parsePetPhotos = function(photosObj)
+{
+  const sizeMap = {
+    'pnt': 60,
+    'fpm': 95,
+    'x': 500,
+    'pn': 300,
+    't': 50
+  };
+
+  if(photosObj.photo.length)
+  {
+    return photosObj.photo.map( function(photo) {
+      return {id: photo['@id'], size: sizeMap[ photo['@size'] ], url: photo['$t']}
+    });
+  } else {
+    return [ {id: photosObj.photo['@id'], size: sizeMap[ photosObj.photo['@size'] ], url: photosObj.photo['@t'] } ];
   }
 };
 
@@ -126,7 +147,15 @@ module.exports = {
         return null;
       }
 
-      return queries.shelterGet(null, {id: shelterId})
+      return queries.shelterGet(null, {id: shelterId});
+    },
+
+    photos({photos}, {size}) {
+      if( ! size )
+      {
+        return photos;
+      }
+      return photos.filter( (photo) => photo.size == size.replace('WIDTH_', ''));
     }
   },
 

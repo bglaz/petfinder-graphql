@@ -73,6 +73,7 @@ type Pet {
   mix: Boolean
   sex: AnimalGender!
   size: AnimalSize!
+  photos(size: PhotoSize): [Photo!]
   status: AnimalStatus!
   description: String
   animal: AnimalType!
@@ -107,6 +108,26 @@ type Shelter {
   longitude: Float
   latitude: Float
   pets(status: AnimalStatus, offset: Int = 0, count: Int = 25): [Pet!]
+}
+
+type Photo {
+  id: Int!
+  """
+  Width of the photo in pixels
+  """
+  size: Int!
+  url: String!
+}
+
+"""
+Possible photo widths to query
+"""
+enum PhotoSize {
+  WIDTH_500
+  WIDTH_300
+  WIDTH_95
+  WIDTH_60
+  WIDTH_50
 }
 
 
