@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node src/index.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["petfinder", "graphql", "api"],
+  "author": "Brian Glaz <brian.glaz@gmail.com> (https://bglaz.com/)",
   "license": "ISC",
   "dependencies": {
-    "apollo-server-express": "^1.3.2",
+    "apollo-server-express": "^1.3.6",
     "axios": "^0.17.1",
     "body-parser": "^1.18.2",
     "dotenv": "^4.0.0",
