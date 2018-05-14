@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/petfinder-graphql.svg)](https://badge.fury.io/js/petfinder-graphql)
+
 This package provides a GraphQL schema for the [Petfinder.com](https://www.petfinder.com/developers/api-docs) API. You will need to register an account to get an API key [Here](https://www.petfinder.com/developers/api-key)
 
 # Installation
