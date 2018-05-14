@@ -6,7 +6,7 @@ if (envResult.error) {
 }
 
 const {mockServer} = require('graphql-tools');
-const schema = require('../src/schema');
+const schema = require('../src/schema')('API_KEY');
 
 const mockedTypes = {
   Int: 42,

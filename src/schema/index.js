@@ -1,5 +1,4 @@
 const {makeExecutableSchema} = require('graphql-tools');
-const resolvers = require('./resolvers');
 
 // Define your types here.
 const typeDefs = `
@@ -180,4 +179,7 @@ type Query {
 }
 `;
 
-module.exports = makeExecutableSchema({typeDefs, resolvers});
+module.exports = function(apiKey) {
+    const resolvers = require('./resolvers')(apiKey);
+    return makeExecutableSchema({typeDefs, resolvers})
+};

@@ -12,7 +12,7 @@ const bodyParser = require('body-parser');
 // for you, based on your schema.
 const {graphqlExpress, graphiqlExpress} = require('apollo-server-express');
 
-const schema = require('./schema');
+const schema = require('./schema')(process.env.API_KEY);
 
 var app = express();
 app.use('/graphql', bodyParser.json(), graphqlExpress({schema}));
