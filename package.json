@@ -1,6 +1,6 @@
 {
   "name": "petfinder-graphql",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "GraphQL schema for the Petfinder.com API",
   "main": "src/schema/index.js",
   "scripts": {
