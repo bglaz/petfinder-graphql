@@ -13,7 +13,7 @@
     "api"
   ],
   "author": "Brian Glaz <brian.glaz@gmail.com> (https://bglaz.com/)",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bglaz/petfinder-graphql.git"
