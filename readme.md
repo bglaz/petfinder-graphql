@@ -1,4 +1,4 @@
-This package provides a GraphQL schema for the [Petfinder.com](https://www.petfinder.com/developers/api-docs). You will need to register an account to get an API key [Here](https://www.petfinder.com/developers/api-key)
+This package provides a GraphQL schema for the [Petfinder.com](https://www.petfinder.com/developers/api-docs) API. You will need to register an account to get an API key [Here](https://www.petfinder.com/developers/api-key)
 
 # Installation
 
