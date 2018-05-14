@@ -164,7 +164,7 @@ type Query {
   Returns a collection of shelter records matching your search criteria.
   """
   shelterFind(
-    location: String, name: String, offset: Int = 0, count: Int = 25
+    location: String!, name: String, offset: Int = 0, count: Int = 25
   ): [Shelter!]
 
   """

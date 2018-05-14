@@ -1,12 +1,12 @@
 const {server, mockedTypes} = require('./setup');
 
-describe('petFind', () => {
-  it('should return an error when missing required param `location`', async () => {
+describe('shelterGetPets', () => {
+  it('should return an error when missing required param `id`', async () => {
     expect.assertions(1);
     const result = await
       server.query(`
-        query petFind {
-          petFind {
+        query shelterGetPets {
+          shelterGetPets {
             id
           }
         }
@@ -19,8 +19,8 @@ describe('petFind', () => {
     expect.assertions(1);
     const result = await
       server.query(`
-        query petFind {
-          petFind(location: "Somewhere") {
+        query shelterGetPets {
+          shelterGetPets(id: "42") {
             id
             foo
           }
@@ -49,8 +49,8 @@ describe('petFind', () => {
     expect.assertions(1);
     const result = await
       server.query(`
-        query petFind {
-          petFind(location: "Somewhere") {
+        query shelterGetPets {
+          shelterGetPets(id: "42") {
             id
             shelterId
             shelterPetId
@@ -67,7 +67,7 @@ describe('petFind', () => {
       `);
 
 
-    const {data: {petFind: res}} = result;
+    const {data: {shelterGetPets: res}} = result;
 
     expect(res).toEqual(
       [
