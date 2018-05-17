@@ -7,7 +7,7 @@ const createResolvers = function(API_KEY) {
 
   if( ! API_KEY )
   {
-    throw new Error("You must provide an API");
+    throw new Error("You must provide an API Key");
   }
 
   const execQuery = function(method, args)
@@ -41,7 +41,7 @@ const createResolvers = function(API_KEY) {
       mix: pet.mix['$t'] === 'yes',
       sex: pet.sex['$t'],
       size: pet.size['$t'],
-      photos: parsePetPhotos(pet.media.photos),
+      photos: pet.media && pet.media.photos ? parsePetPhotos(pet.media.photos) : [],
       status: pet.status['$t'],
       description: pet.description['$t'],
       animal: pet.animal['$t'].toLowerCase(),
