@@ -147,8 +147,8 @@ type Query {
   You can choose the characteristics of the pet you want returned using the various arguments to this method.
   """
   petGetRandom(
-    animal: AnimalType, breed: String, size: AnimalSize, sex: AnimalGender, location: String, shelterid: String
-  ): Pet!
+    count: Int = 1, animal: AnimalType, breed: String, size: AnimalSize, sex: AnimalGender, location: String, shelterid: String
+  ): [Pet!]
 
   """
   Searches for pets according to the criteria you provide and returns a collection of pet records matching your search.

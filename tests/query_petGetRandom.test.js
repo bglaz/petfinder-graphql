@@ -17,7 +17,22 @@ describe('petGetRandom', () => {
       expect(result).toMatchObject({errors: expect.any(Array)});
     });
   
-    it('should return an object of type `Pet`', async() => {
+    it('should return an array of `Pet` objects', async() => {
+
+      const petResponse =  {
+        id: mockedTypes['Int'],
+        shelterId: mockedTypes['String'],
+        shelterPetId: mockedTypes['String'],
+        options: [mockedTypes['AnimalOptions'], mockedTypes['AnimalOptions']],
+        age: mockedTypes['AnimalAge'],
+        name: mockedTypes['String'],
+        mix: mockedTypes['Boolean'],
+        sex: mockedTypes['AnimalGender'],
+        size: mockedTypes['AnimalSize'],
+        description: mockedTypes['String'],
+        breeds: [mockedTypes['String'], mockedTypes['String']]
+      }
+
       expect.assertions(1);
       const result = await
       server.query(`
@@ -40,20 +55,8 @@ describe('petGetRandom', () => {
         
         const {data: {petGetRandom: res}} = result;
   
-        expect(res).toMatchObject(
-          {
-            id: mockedTypes['Int'],
-            shelterId: mockedTypes['String'],
-            shelterPetId: mockedTypes['String'],
-            options: [mockedTypes['AnimalOptions'], mockedTypes['AnimalOptions']],
-            age: mockedTypes['AnimalAge'],
-            name: mockedTypes['String'],
-            mix: mockedTypes['Boolean'],
-            sex: mockedTypes['AnimalGender'],
-            size: mockedTypes['AnimalSize'],
-            description: mockedTypes['String'],
-            breeds: [mockedTypes['String'], mockedTypes['String']]
-          }
+        expect(res).toEqual(
+         [petResponse, petResponse]
         );
     });
 });

@@ -93,7 +93,7 @@ const createResolvers = function(API_KEY) {
         results = await execQuery(method, {output: 'full', ...args}),
         rawData = results.data.petfinder.pet;
 
-      return parsePetfinderPet(rawData);
+        return rawData.length ? rawData.map( (pet) => parsePetfinderPet(pet) ) : [parsePetfinderPet(rawData)];
     },
 
     async petFind(_, args)
